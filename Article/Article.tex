@@ -130,21 +130,25 @@ Since we could not confirm the normality of the rating distribution, we applied 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{gamma_fit.png}
-    \caption{Gamma distribution fitted to the 'Turns' data}
+    \caption{Gamma distribution estimation of Turns}
     \label{fig:gamma_fit}
 \end{figure}
 \subsection{Distribution of 'Turns'}
 
-To better understand the distribution of the 'Turns' variable, we attempted to fit it to several probability distribution families. The Gamma distribution was selected first due to its ability to model skewed data. However, as shown in Figure \ref{fig:gamma_fit}, the Gamma distribution is too broad for this dataset, suggesting it does not fully capture the underlying structure of 'Turns.'
+Finally, the most complete way to gain knowlage on a dataset is to classify its distribution. To do that, let us look at the moment's information for Turns:
+\[Mean: 61.96255029402662\]
+\[Standard Deviation: 33.731730929355365\]
+\[Skewness: 0.9052618256476783\]
+\[Kurtosis: 1.4921324651335777\]
 
-To refine the fit, we combined the Gamma distribution with a Poisson distribution, which has a narrower shape. This combination results in a more accurate fit to the empirical data, as shown in Figure \ref{fig:gam_poi_fit}. The Gamma-Poisson mixture balances the excess spread of the Gamma distribution with the narrowness of the Poisson, providing a better representation of the 'Turns' distribution.
+The Kurtosis is too large for a normal distribution and too small for poisson. The skewness suggests an a-symetric distribution.A good general distribution family is the Gamma distribution family, but as seen in Figure~\ref{fig:gamma_fit} it lacks flexibility of shape. To gain more flexibility we have used the general gamma distribution family. But this won't add to our lack of Kurtosis. To do that we decided to average the general gamma with a poisson distribution and to fit them together. The results are shown in Figure~\ref{fig:gam_poi_fit}.
 
 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{gam_poi_fit.png}
-    \caption{Gamma-Poisson distribution fitted to the 'Turns' data}
+    \includegraphics[width=0.8\linewidth]{gamma_poisson_fit.png}
+    \caption{Gamma-Poisson distribution estimation of Turns}
     \label{fig:gam_poi_fit}
 \end{figure}
 
@@ -166,6 +170,50 @@ A correlation matrix is a table that displays the pairwise correlation coefficie
 \[r_{XY} = \frac{Cov(X,Y)}{\sigma_X\sigma_Y}\]
 
 \subsection{Mann-Whitney U Test}
+The \textbf{Mann-Whitney U test} is a non-parametric test used to determine whether there is a significant difference between two independent samples. The null hypothesis (\(H_0\)) assumes that the two distributions are identical, and the alternative hypothesis (\(H_a\)) assumes that one distribution tends to have larger or smaller values than the other.
+
+
+Procedure:
+
+Let \( n_1 \) and \( n_2 \) be the sample sizes of two independent groups, \( X_1, X_2, \dots, X_{n_1} \) and \( Y_1, Y_2, \dots, Y_{n_2} \).
+
+1. Rank all the observations from both groups together, assigning rank 1 to the smallest value, rank 2 to the second smallest, and so on.
+
+2. Compute the sum of the ranks for the first group \( R_1 \).
+
+3. The U statistic for the first group is given by:
+\[
+U_1 = n_1 n_2 + \frac{n_1(n_1 + 1)}{2} - R_1
+\]
+Similarly, compute the U statistic for the second group:
+\[
+U_2 = n_1 n_2 + \frac{n_2(n_2 + 1)}{2} - R_2
+\]
+
+4. The Mann-Whitney U statistic is the smaller of \( U_1 \) and \( U_2 \):
+\[
+U = \min(U_1, U_2)
+\]
+
+Normal Approximation (for large samples):
+
+When the sample sizes are large (\(n_1 > 20\) and \(n_2 > 20\)), the distribution of the U statistic can be approximated by a normal distribution with the following mean and standard deviation:
+
+\[
+\mu_U = \frac{n_1 n_2}{2}
+\]
+\[
+\sigma_U = \sqrt{\frac{n_1 n_2 (n_1 + n_2 + 1)}{12}}
+\]
+
+The standard normal \( Z \)-score is then computed as:
+\[
+Z = \frac{U - \mu_U}{\sigma_U}
+\]
+
+Decision Rule:
+
+To test the null hypothesis, compare the calculated U statistic (or Z-score for large samples) to the critical value from the Mann-Whitney U distribution. If the observed value of \( U \) (or \( Z \)) is extreme enough, reject \( H_0 \) in favor of \( H_a \).
 
 
 \newpage
