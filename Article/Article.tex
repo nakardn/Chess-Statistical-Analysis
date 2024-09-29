@@ -152,8 +152,18 @@ To refine the fit, we combined the Gamma distribution with a Poisson distributio
 \subsection{Quantile - Quantile Plot}
 
 \subsection{Kolmogorov-Smirnov Test for Normality}
+The Kolmogorov-Smirnov (KS) test for normality evaluates whether a sample comes from a normal distribution. It uses the empirical cumulative distribution function (ECDF), $F_n(x)$, of the sample and compares it to the cumulative distribution function (CDF) of the normal distribution, $F(x)$. The test statistic, $D_n$, is defined as:
+\[D_n = \sup_x |F_n(x) - F(x)|\]
+
+The null hypothesis $H_0$ assumes that the sample comes from the normal distribution, while the alternative hypothesis $H_1$ posits that it does not.
+
+    If $D_n$ exceeds a critical value (based on the sample size and significance level), we reject $H_0$, concluding the sample deviates significantly from normality.
+
+The KS test is sensitive to both location and shape differences, but less powerful in detecting deviations in the tails of the distribution when compared to other tests like Shapiro-Wilk or Anderson-Darling.
 
 \subsection{Correlation Matrix}
+A correlation matrix is a table that displays the pairwise correlation coefficients between multiple variables in a dataset. Each element in the matrix represents the degree of linear relationship between two variables, typically measured by Pearson's correlation coefficient:
+\[r_{XY} = \frac{Cov(X,Y)}{\sigma_X\sigma_Y}\]
 
 \subsection{Mann-Whitney U Test}
 
