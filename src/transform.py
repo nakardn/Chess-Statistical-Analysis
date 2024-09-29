@@ -10,8 +10,6 @@ def transform(df):
     df = df.rename(columns={'last_move_at': 'year'})
     df = df.rename(columns={'created_at': 'time'})
     df = df.rename(columns={'increment_code': 'time_control'})
-    df = df[df['victory_status'] != 'resign']
-    df = df[df['victory_status'] != 'outoftime']
     df = df.reset_index()
     df = df.drop(columns=['index'])
     df = updateELO(df)

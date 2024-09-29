@@ -7,17 +7,15 @@ def tr_plot(df1, df2):
     # Generate random data for four datasets
     data1 = df1['white_rating']
     data2 = df2['white_rating']
-    data3 = df1['turns']
-    data4 = df2['turns']
 
-    data = [data1, data2, data3, data4]
+    data = [data1, data2]
 
     # Set up the figure and axes
-    fig, axs = plt.subplots(2, 2, figsize=(10, 10))  # 2x2 grid of plots
+    fig, axs = plt.subplots(2, figsize=(10, 10))
 
     for i, ax in enumerate(axs.flatten()):
         # Plot the histogram
-        if i % 2 == 1:
+        if i % 2 == 0:
             color = 'b'
         else:
             color = 'g'
@@ -33,7 +31,7 @@ def tr_plot(df1, df2):
         ax.plot(x, p, 'k', linewidth=2)
         
         # Title with the fit parameters
-        title1 = 'player rating' if i < 2 else 'turns'
+        title1 = 'player rating'
         title2 = ' before transformation' if i % 2 == 0 else ' after transformation'
         ax.set_title(title1+title2)
 

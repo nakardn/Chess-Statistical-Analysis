@@ -74,11 +74,17 @@ To optimize the quality of our analysis, we undertook a cleaning process to remo
 
 \begin{itemize}
     \item \textbf{Uncompetitive Games}: Games marked as casual or non-competitive were excluded. Such games may not reflect players' full effort or strategic depth, and are thus not representative of a standard chess match.   
-
-    \item \textbf{Resignations}: Games concluded by resignation were removed. A resignation introduces a psychological factor into game length and outcome, which can skew the statistical distribution. By removing these games, we aim to focus on games decided by normal play.   
  
     \item \textbf{Elo Adjustments}: New players are initially assigned an Elo rating of 1500, which can skew the distribution of player strength. To mitigate this, each player's rating was updated to reflect their most recent Elo score within the dataset.
 \end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{transformation_plot.png}
+    \caption{Transformation's effected on Rating and Turns}
+    \label{fig:transformation_plot}
+\end{figure}
+
 
 After these trasformations, we are left with 5,827 games which we will now begin to analyze.
 
@@ -103,22 +109,9 @@ To refine the fit, we combined the Gamma distribution with a Poisson distributio
     \label{fig:gam_poi_fit}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{allgames.png}
-    \caption{Gamma-Poisson distribution fitted to the 'Turns' data}
-    \label{fig:all_games}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{ratedgames.png}
-    \caption{Gamma-Poisson distribution fitted to the 'Turns' data}
-    \label{fig:rated_games}
-\end{figure}
 
 \subsection{Rating Distribution}
-The distribution of player ratings in the dataset initially resembles a normal distribution with a peak around the mean. However, this peak diminishes when games involving unrated players are excluded, bringing the distribution closer to normality. This is illustrated in Figure~\ref{fig:all_games} and Figure~\ref{fig:rated_games}. Additionally, the QQ plot (Figure~\ref{fig:rating_qq}) supports the similarity between the player rating distribution and a normal distribution, albeit with deviations at the extremes.
+The distribution of player ratings in the dataset initially resembles a normal distribution with a peak around the mean. However, this peak diminishes when games involving unrated players are excluded, bringing the distribution closer to normality. This is illustrated in Figure~\ref{fig:transformation_plot}. Additionally, the QQ plot (Figure~\ref{fig:rating_qq}) supports the similarity between the player rating distribution and a normal distribution, albeit with deviations at the extremes.
 
 \begin{figure}[H]
     \centering
