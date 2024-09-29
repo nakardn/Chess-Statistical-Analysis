@@ -88,6 +88,16 @@ To optimize the quality of our analysis, we undertook a cleaning process to remo
 
 After these trasformations, we are left with 5,827 games which we will now begin to analyze.
 
+\subsection{Rating Distribution}
+The distribution of player ratings in the dataset initially resembles a normal distribution with a peak around the mean. However, this peak diminishes when games involving unrated players are excluded, bringing the distribution closer to normality. This is illustrated in Figure~\ref{fig:transformation_plot}. Additionally, the QQ plot (Figure~\ref{fig:rating_qq}) supports the similarity between the player rating distribution and a normal distribution, albeit with deviations at the extremes.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{ratingqq.png}
+    \caption{Quantile - Quantile plot of player rating in relation to fitted normal distribution}
+    \label{fig:rating_qq}
+\end{figure}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{gamma_fit.png}
@@ -109,16 +119,6 @@ To refine the fit, we combined the Gamma distribution with a Poisson distributio
     \label{fig:gam_poi_fit}
 \end{figure}
 
-
-\subsection{Rating Distribution}
-The distribution of player ratings in the dataset initially resembles a normal distribution with a peak around the mean. However, this peak diminishes when games involving unrated players are excluded, bringing the distribution closer to normality. This is illustrated in Figure~\ref{fig:transformation_plot}. Additionally, the QQ plot (Figure~\ref{fig:rating_qq}) supports the similarity between the player rating distribution and a normal distribution, albeit with deviations at the extremes.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{ratingqq.png}
-    \caption{Gamma-Poisson distribution fitted to the 'Turns' data}
-    \label{fig:rating_qq}
-\end{figure}
 
 \subsubsection{Kolmogorov-Smirnov (KS) Test for Normality}
 We applied the Kolmogorov-Smirnov (KS) test to evaluate whether the player rating distribution follows a normal distribution. The test returned a p-value of \(8.9649 \times 10^{-13}\), which is significantly lower than the threshold of \(0.03\) for a confidence level of 97\%, thus rejecting the null hypothesis that the rating distribution is normally distributed. However, when the test was performed on a random 10\% sample of player ratings, the p-value increased to 0.49, meaning we could not reject the null hypothesis at that sample size. This result indicates that while the entire population does not fit a normal distribution, smaller samples may approximate normality \cite{kssample}.
