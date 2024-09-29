@@ -135,13 +135,17 @@ Since we could not confirm the normality of the rating distribution, we applied 
 \end{figure}
 \subsection{Distribution of 'Turns'}
 
-Finally, the most complete way to gain knowlage on a dataset is to classify its distribution. To do that, let us look at the moment's information for Turns:
+The most comprehensive way to analyze a dataset is through the classification of its distribution. To achieve this, we examine the moments of the distribution for the variable "Turns" as follows:
 \[Mean: 61.96255029402662\]
 \[Standard Deviation: 33.731730929355365\]
 \[Skewness: 0.9052618256476783\]
 \[Kurtosis: 1.4921324651335777\]
 
-The Kurtosis is too large for a normal distribution and too small for poisson. The skewness suggests an a-symetric distribution.A good general distribution family is the Gamma distribution family, but as seen in Figure~\ref{fig:gamma_fit} it lacks flexibility of shape. To gain more flexibility we have used the general gamma distribution family. But this won't add to our lack of Kurtosis. To do that we decided to average the general gamma with a poisson distribution and to fit them together. The results are shown in Figure~\ref{fig:gam_poi_fit}.
+The kurtosis value (1.5) is higher than expected for a normal distribution, but lower than that of a Poisson distribution, indicating that neither distribution adequately fits the data. The positive skewness (0.9) implies an asymmetric distribution, with a longer tail on the right side.
+
+Given these characteristics, a natural candidate for modeling the data is the Gamma distribution family, known for handling positively skewed data. However, as demonstrated in Figure~\ref{fig:gamma_fit}, the Gamma distribution lacks sufficient flexibility to capture the dataset’s specific shape. To address this limitation, we explored the more general Generalized Gamma distribution, which offers greater shape flexibility.
+
+Despite this improvement, the Generalized Gamma distribution does not sufficiently account for the excess kurtosis. Therefore, we combined it with a Poisson distribution to create a mixture model that captures both the skewness and kurtosis properties. The results of this hybrid model are illustrated in Figure~\ref{fig:gam_poi_fit}.
 
 
 
