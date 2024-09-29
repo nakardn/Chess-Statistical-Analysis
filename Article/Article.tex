@@ -68,6 +68,42 @@ The length of a chess match is influenced by several factors, including the play
 Our dataset comprises 19,113 games from Lichess, an online chess platform, each described by 16 features. The most relevant features to our analysis are: \begin{itemize} \item \textbf{Turns}: A positive integer representing the length of the game, where one turn includes a move by both White and Black. \item \textbf{ELO Rating}: A system that quantifies player skill, widely used by FIDE and online chess platforms, which we use to assess its correlation with match length. \item \textbf{Time Controls}: Competitive games are categorized into four main time control classes: Bullet, Blitz, Rapid, and Classical, based on initial clock times and increments. \item \textbf{Winner and Victory Status}: These columns capture whether White or Black won and the method of victory (checkmate, resignation, draw). \end{itemize} Through statistical analysis, we aim to understand how these factors influence the duration of chess matches and to provide insights into the relationship between skill level and game dynamics. 
 
 \section{Results}
+\subsection{Data Transformation}
+
+To optimize the quality of our analysis, we undertook a cleaning process to remove entries that could distort or obscure meaningful insights from the dataset. Below are the key transformations:
+
+\begin{itemize}
+    \item \textbf{Uncompetitive Games}: Games marked as casual or non-competitive were excluded. Such games may not reflect players' full effort or strategic depth, and are thus not representative of a standard chess match.   
+
+    \item \textbf{Resignations}: Games concluded by resignation were removed. A resignation introduces a psychological factor into game length and outcome, which can skew the statistical distribution. By removing these games, we aim to focus on games decided by normal play.   
+ 
+    \item \textbf{Elo Adjustments}: New players are initially assigned an Elo rating of 1500, which can skew the distribution of player strength. To mitigate this, each player's rating was updated to reflect their most recent Elo score within the dataset.
+\end{itemize}
+
+After these trasformations, we are left with 5,827 games which we will now begin to analyze.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{gamma_fit.png}
+    \caption{Gamma distribution fitted to the 'Turns' data}
+    \label{fig:gamma_fit}
+\end{figure}
+\subsection{Distribution of 'Turns'}
+
+To better understand the distribution of the 'Turns' variable, we attempted to fit it to several probability distribution families. The Gamma distribution was selected first due to its ability to model skewed data. However, as shown in Figure \ref{fig:gamma_fit}, the Gamma distribution is too broad for this dataset, suggesting it does not fully capture the underlying structure of 'Turns.'
+
+To refine the fit, we combined the Gamma distribution with a Poisson distribution, which has a narrower shape. This combination results in a more accurate fit to the empirical data, as shown in Figure \ref{fig:gam_poi_fit}. The Gamma-Poisson mixture balances the excess spread of the Gamma distribution with the narrowness of the Poisson, providing a better representation of the 'Turns' distribution.
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{gam_poi_fit.png}
+    \caption{Gamma-Poisson distribution fitted to the 'Turns' data}
+    \label{fig:gam_poi_fit}
+\end{figure}
+
+
 
 \newpage
 \bibliographystyle{IEEEtran}
