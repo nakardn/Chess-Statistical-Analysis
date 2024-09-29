@@ -65,7 +65,7 @@ Chess is one of humanity's oldest board games \cite{chesswiki}, played by two pl
 
 The length of a chess match is influenced by several factors, including the players' skill levels, strategic choices, and in-game dynamics. In this project, we investigate the relationship between player ratings and the duration of chess matches, aiming to determine whether higher-rated players tend to play shorter or longer games. In addition to player ratings, we examine other variables that may impact match length, such as opening strategies, game outcomes (win, loss, draw), and time controls.
 
-Our dataset comprises 19,113 games from Lichess, an online chess platform, each described by 16 features. The most relevant features to our analysis are: \begin{itemize} \item \textbf{Turns}: A positive integer representing the length of the game, where one turn includes a move by both White and Black. \item \textbf{ELO Rating}: A system that quantifies player skill, widely used by FIDE and online chess platforms, which we use to assess its correlation with match length. \item \textbf{Time Controls}: Competitive games are categorized into four main time control classes: Bullet, Blitz, Rapid, and Classical, based on initial clock times and increments. \item \textbf{Winner and Victory Status}: These columns capture whether White or Black won and the method of victory (checkmate, resignation, draw). \end{itemize} Through statistical analysis, we aim to understand how these factors influence the duration of chess matches and to provide insights into the relationship between skill level and game dynamics. 
+Our dataset \cite{dataset} comprises 19,113 games from Lichess, an online chess platform, each described by 16 features. The most relevant features to our analysis are: \begin{itemize} \item \textbf{Turns}: A positive integer representing the length of the game, where one turn includes a move by both White and Black. \item \textbf{ELO Rating}: A system that quantifies player skill, widely used by FIDE and online chess platforms \cite{ELO}, which we use to assess its correlation with match length. \item \textbf{Time Controls}: Competitive games are categorized into four main time control classes: Bullet, Blitz, Rapid, and Classical, based on initial clock times and increments. \item \textbf{Winner and Victory Status}: These columns capture whether White or Black won and the method of victory (checkmate, resignation, draw). \end{itemize} Through statistical analysis, we aim to understand how these factors influence the duration of chess matches and to provide insights into the relationship between skill level and game dynamics. 
 
 \section{Results}
 \subsection{Data Transformation}
@@ -102,6 +102,52 @@ To refine the fit, we combined the Gamma distribution with a Poisson distributio
     \caption{Gamma-Poisson distribution fitted to the 'Turns' data}
     \label{fig:gam_poi_fit}
 \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{allgames.png}
+    \caption{Gamma-Poisson distribution fitted to the 'Turns' data}
+    \label{fig:all_games}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{ratedgames.png}
+    \caption{Gamma-Poisson distribution fitted to the 'Turns' data}
+    \label{fig:rated_games}
+\end{figure}
+
+\subsection{Rating Distribution}
+The distribution of player ratings in the dataset initially resembles a normal distribution with a peak around the mean. However, this peak diminishes when games involving unrated players are excluded, bringing the distribution closer to normality. This is illustrated in Figure~\ref{fig:all_games} and Figure~\ref{fig:rated_games}. Additionally, the QQ plot (Figure~\ref{fig:rating_qq}) supports the similarity between the player rating distribution and a normal distribution, albeit with deviations at the extremes.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{ratingqq.png}
+    \caption{Gamma-Poisson distribution fitted to the 'Turns' data}
+    \label{fig:rating_qq}
+\end{figure}
+
+\subsubsection{Kolmogorov-Smirnov (KS) Test for Normality}
+We applied the Kolmogorov-Smirnov (KS) test to evaluate whether the player rating distribution follows a normal distribution. The test returned a p-value of \(8.9649 \times 10^{-13}\), which is significantly lower than the threshold of \(0.03\) for a confidence level of 97\%, thus rejecting the null hypothesis that the rating distribution is normally distributed. However, when the test was performed on a random 10\% sample of player ratings, the p-value increased to 0.49, meaning we could not reject the null hypothesis at that sample size. This result indicates that while the entire population does not fit a normal distribution, smaller samples may approximate normality.
+
+\subsection{Relations Between Features}
+Analyzing the dataset’s convolution matrix reveals linear relationships between certain features. For example, there is a strong correlation between the ratings of white and black players in a game, which aligns with the expectation that players of similar ratings tend to compete against each other. However, no significant linear relationship was observed between the winner and the ratings of either player.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{ratingecdf.png}
+    \caption{Gamma-Poisson distribution fitted to the 'Turns' data}
+    \label{fig:ecdf_plot}
+\end{figure}
+
+\subsection{Connection Between Player Rating and Game Length}
+To investigate whether player ratings are associated with game length, we divided players into two groups based on their ratings: those with ratings higher than 1500 (high-rated) and those with ratings lower than 1500 (low-rated). The threshold of 1500 was chosen because it represents the starting rating on the Lichess platform. The empirical cumulative distribution function (ECDF) of game lengths for both groups (Figure~\ref{fig:ecdf_plot}) shows that high-rated players generally play longer games.
+
+\subsubsection{Mann-Whitney U Test for Game Length}
+Since we could not confirm the normality of the rating distribution, we applied the non-parametric Mann-Whitney U test to compare the game lengths between high-rated and low-rated players. Our null hypothesis was that high-rated players do not play longer games than low-rated players on average. The test returned a p-value of \(2.7 \times 10^{-73}\), which allows us to reject the null hypothesis. Therefore, we conclude that player rating significantly influences game length, with higher-rated players tending to play longer games.
+
+\subsection{Summary of Results}
+The analysis demonstrates a clear statistical relationship between player rating and game length. The Mann-Whitney U test confirmed that higher-rated players play longer games. This finding supports the hypothesis that player rating is a factor in game duration, with the distribution of ratings further informing our understanding of game dynamics.
 
 
 
