@@ -89,18 +89,42 @@ To optimize the quality of our analysis, we undertook a cleaning process to remo
 After these trasformations, we are left with 16,155 games which we will now begin to analyze.
 
 \subsection{Rating Distribution}
-The distribution of player ratings in the dataset initially resembles a normal distribution with a peak around the mean. However, this peak diminishes when games involving unrated players are excluded, bringing the distribution closer to normality. This is illustrated in Figure~\ref{fig:transformation_plot}. Additionally, the QQ plot (Figure~\ref{fig:rating_qq}) supports the similarity between the player rating distribution and a normal distribution, albeit with deviations at the extremes.
+The distribution of player ratings in the dataset initially resembles a normal distribution with a peak around the mean. However, this peak diminishes when games involving unrated players are excluded, bringing the distribution closer to normality. This is illustrated in Figure~\ref{fig:transformation_plot}. Additionally, the QQ plot (Figure~\ref{fig:rating_qq}) supports the similarity between the player rating distribution and a normal distribution, albeit with deviations at the tails, which are exacerbated by the QQ plot's sensitivity to deviations at the tail.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{ratingqq.png}
-    \caption{Quantile - Quantile plot of player rating in relation to fitted normal distribution}
+    \caption{Quantile - Quantile plot of white player rating in relation to normal distribution}
     \label{fig:rating_qq}
 \end{figure}
 
 
 \subsubsection*{Kolmogorov-Smirnov (KS) Test for Normality}
 We applied the Kolmogorov-Smirnov (KS) test to evaluate whether the player rating distribution follows a normal distribution. The test returned a p-value of \(8.9649 \times 10^{-13}\), which is significantly lower than the threshold of \(0.03\) for a confidence level of 97\%, thus rejecting the null hypothesis that the rating distribution is normally distributed. However, when the test was performed on a random 10\% sample of player ratings, the p-value increased to 0.49, meaning we could not reject the null hypothesis at that sample size. This result indicates that while the entire population does not fit a normal distribution, smaller samples may approximate normality \cite{kssample}.
+
+
+\subsection{Relations Between Features}
+Analyzing the dataset’s correlation matrix reveals linear relationships between certain features. For example, there is a weak positive correlation between the players' average rating and game length. There are also weak negative correlations between the number of turns and both the absolute difference in player ratings and the 'winner' variable, where 'winner' is numerized as 0 for draws and 1 for games with a winner. From these correlations, we can tentatively conclude that:
+\begin{itemize}
+    \item Games involving more skilled players tend to last longer.
+ 
+    \item Games with a larger skill gap between players may end faster.
+
+    \item Draws tend to draw out longer then desicive games.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{corr_mat.png}
+    \caption{Heat map of the correlation matrix}
+    \label{fig:corr_mat}
+\end{figure}
+
+\subsection{Connection Between Player Rating and Game Length}
+To investigate whether player ratings are associated with game length, we divided players into two groups based on their ratings: those with ratings higher than 1500 (high-rated) and those with ratings lower than 1500 (low-rated). The threshold of 1500 was chosen because it represents the starting rating on the Lichess platform. The empirical cumulative distribution function (ECDF) of game lengths for both groups (Figure~\ref{fig:ecdf_plot}) shows that high-rated players generally play longer games.
+
+\subsubsection*{Mann-Whitney U Test for Game Length}
+Since we could not confirm the normality of the rating distribution, we applied the non-parametric Mann-Whitney U test to compare the game lengths between high-rated and low-rated players. Our null hypothesis was that high-rated players do not play longer games than low-rated players on average. The test returned a p-value of \(2.7 \times 10^{-73}\), which allows us to reject the null hypothesis. Therefore, we conclude that player rating significantly influences game length, with higher-rated players tending to play longer games.
 
 
 \begin{figure}[H]
@@ -123,26 +147,6 @@ To refine the fit, we combined the Gamma distribution with a Poisson distributio
     \caption{Gamma-Poisson distribution fitted to the 'Turns' data}
     \label{fig:gam_poi_fit}
 \end{figure}
-
-
-\subsection{Relations Between Features}
-Analyzing the dataset’s convolution matrix reveals linear relationships between certain features. For example, there is a strong correlation between the ratings of white and black players in a game, which aligns with the expectation that players of similar ratings tend to compete against each other. However, no significant linear relationship was observed between the winner and the ratings of either player.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{ratingecdf.png}
-    \caption{Gamma-Poisson distribution fitted to the 'Turns' data}
-    \label{fig:ecdf_plot}
-\end{figure}
-
-\subsection{Connection Between Player Rating and Game Length}
-To investigate whether player ratings are associated with game length, we divided players into two groups based on their ratings: those with ratings higher than 1500 (high-rated) and those with ratings lower than 1500 (low-rated). The threshold of 1500 was chosen because it represents the starting rating on the Lichess platform. The empirical cumulative distribution function (ECDF) of game lengths for both groups (Figure~\ref{fig:ecdf_plot}) shows that high-rated players generally play longer games.
-
-\subsubsection*{Mann-Whitney U Test for Game Length}
-Since we could not confirm the normality of the rating distribution, we applied the non-parametric Mann-Whitney U test to compare the game lengths between high-rated and low-rated players. Our null hypothesis was that high-rated players do not play longer games than low-rated players on average. The test returned a p-value of \(2.7 \times 10^{-73}\), which allows us to reject the null hypothesis. Therefore, we conclude that player rating significantly influences game length, with higher-rated players tending to play longer games.
-
-\subsection{Summary of Results}
-The analysis demonstrates a clear statistical relationship between player rating and game length. The Mann-Whitney U test confirmed that higher-rated players play longer games. This finding supports the hypothesis that player rating is a factor in game duration, with the distribution of ratings further informing our understanding of game dynamics.
 
 
 

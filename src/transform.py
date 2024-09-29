@@ -37,4 +37,4 @@ def ave(white_rating, black_rating):
     return (white_rating + black_rating) // 2
 
 def dif(white_rating, black_rating):
-    return (white_rating - black_rating)
+    return np.abs(white_rating - black_rating)
