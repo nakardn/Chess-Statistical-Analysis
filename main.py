@@ -70,3 +70,33 @@ for i in range(n):
     else:
         samples[i] = stats.poisson.rvs(lam_fitted)
 KS_2test(data, samples)
+'''
+fig, a_fitted, c_fitted, loc_fitted, scale_fitted, lam_fitted, w_fitted = fit_gamma_poisson(df_cl[df_cl['ave_rating'] == 'low']['turns'])
+
+save_plot(fig, 'gamma_poisson_fit_low', save_dir)
+
+data = df_cl[df_cl['ave_rating'] == 'low']['turns']
+n = len(data)
+# Use a weighted random choice to sample from the mixture
+samples = np.zeros(n)
+for i in range(n):
+    if np.random.rand() < w_fitted:
+        samples[i] = stats.gengamma.rvs(a_fitted, c_fitted, loc=loc_fitted, scale=scale_fitted)
+    else:
+        samples[i] = stats.poisson.rvs(lam_fitted)
+KS_2test(data, samples)
+
+fig, a_fitted, c_fitted, loc_fitted, scale_fitted, lam_fitted, w_fitted = fit_gamma_poisson(df_cl[df_cl['ave_rating'] == 'high']['turns'])
+
+save_plot(fig, 'gamma_poisson_fit_high', save_dir)
+
+data = df_cl[df_cl['ave_rating'] == 'high']['turns']
+n = len(data)
+# Use a weighted random choice to sample from the mixture
+samples = np.zeros(n)
+for i in range(n):
+    if np.random.rand() < w_fitted:
+        samples[i] = stats.gengamma.rvs(a_fitted, c_fitted, loc=loc_fitted, scale=scale_fitted)
+    else:
+        samples[i] = stats.poisson.rvs(lam_fitted)
+KS_2test(data, samples) '''
