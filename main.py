@@ -49,6 +49,9 @@ fig = corr_plot(df_tr)
 
 save_plot(fig, 'corr_mat', save_dir)
 
+print("Time Control test")
+KS_2test(df_tr[df_tr['time_control'] == 'Classical']['turns'], df_tr[df_tr['time_control'] == 'Rapid']['turns'])
+
 fig = fit_gamma(df_tr['turns'])
 
 save_plot(fig, 'gamma_fit', save_dir)

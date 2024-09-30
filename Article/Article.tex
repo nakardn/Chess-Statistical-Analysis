@@ -66,6 +66,7 @@ This study explores the relationship between \textbf{player ratings} and \textbf
 \end{abstract}
 
 
+
 \section{Introduction}
 Chess is one of humanity's oldest board games \cite{chesswiki}, played by two players on an $8\times8$ grid. Each player, controlling 16 pieces of their color, aims to checkmate the opponent's King, making it impossible for the King to escape capture. Unlike many games, chess does not involve luck or hidden information; the outcome is determined solely by the players' knowledge, strategy, and analytical skills.
 
@@ -131,6 +132,8 @@ To investigate whether player ratings are associated with game length, we divide
 \subsubsection*{Mann-Whitney U Test for Game Length}
 Since we could not confirm the normality of the rating distribution, we applied the non-parametric Mann-Whitney U test to compare the game lengths between high-rated and low-rated players. Our null hypothesis was that high-rated players' game length mean wasn't higher than low-rated players' mean. The test returned a p-value of \(2.7 \times 10^{-73}\), which allows us to reject the null hypothesis. Therefore, we conclude that player rating significantly influences game length, with higher-rated players tending to play longer games.
 
+\subsection{The Effect of the Time Controls on Game Length}
+To check if the game's time controls have a significant correlation with turns, we checked a 2 sample KS test for the turns in rapid and Classical, which represent the vast majority of the games in the dataset. The resulting p value was $0.322$, which means the Null hypothesis of the two datasets being the same stands. From this we can conclude that there is no significant correlation between Time Controls and Game Length.
 
 \begin{figure}[H]
     \centering
@@ -235,7 +238,7 @@ Let us find the MLE of GP:
 Now, by taking the negative log of the likelihood function, we can use minimizing optimization algorithms to find the optimal parameters numerically, since here an analytical solution is difficult to find.
 
 \subsection{Nelder - Mead optimization method}
-The Nelder-Mead optimization method is a direct search algorithm used for solving unconstrained nonlinear optimization problems without requiring gradient information. It operates on a simplex, a geometric shape consisting of $n+1$ vertices in an $n$-dimensional space. The algorithm iteratively updates this simplex by reflecting, expanding, contracting, or shrinking its vertices to explore the search space. These transformations aim to minimize an objective function $f(x)$ through comparisons of function values at the simplex vertices. Despite its simplicity, the method is known for efficiency in practice but does not guarantee convergence to a global minimum, especially in higher-dimensional or highly non-convex landscapes. It is widely applied in scenarios where gradient information is unavailable or expensive to compute.
+The Nelder-Mead optimization method is a direct search algorithm used for solving unconstrained nonlinear optimization problems without requiring gradient information. It operates on a simplex, a geometric shape consisting of $n+1$ vertices in an $n$-dimensional space. The algorithm iteratively updates this simplex by reflecting, expanding, contracting, or shrinking its vertices to explore the search space. These transformations aim to minimize an objective function $f(x)$ through comparisons of function values at the simplex vertices. Despite its simplicity, the method is known for efficiency in practice but does not guarantee convergence to a global minimum, especially in higher-dimensional or highly non-convex landscapes. It is widely applied in scenarios where gradient information is unavailable or expensive to compute. We
 
 
 \section{Discussion}

@@ -16,6 +16,28 @@ def transform(df):
     df = df.rename(columns={'white_id': 'ave_rating'})
     df = df.rename(columns={'black_id': 'dif_rating'})
 
+    def chess_time_class(time_control: str) -> str:
+        # Split the time control into minutes (X) and increment (Y)
+        try:
+            X, Y = map(int, time_control.split('+'))
+        except ValueError:
+            return "Invalid time control format"
+        
+        # Convert X (minutes) to total seconds and add the increment per move
+        total_time = X * 60 + Y * 40  # Assume 40 moves for standard calculation
+        
+        # Determine the time class based on total time
+        if total_time <= 180:
+            return "Bullet"
+        elif total_time <= 600:
+            return "Blitz"
+        elif total_time <= 1800:
+            return "Rapid"
+        else:
+            return "Classical"
+    
+    df['time_control'] = df['time_control'].apply(chess_time_class)
+
     for index, row in df.iterrows():
         df.at[index, 'ave_rating'] = ave(row['white_rating'], row['black_rating'])
         df.at[index, 'dif_rating'] = dif(row['white_rating'], row['black_rating'])  
