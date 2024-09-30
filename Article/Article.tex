@@ -121,10 +121,9 @@ Analyzing the dataset’s correlation matrix reveals linear relationships betwee
 \end{figure}
 
 \subsection{Connection Between Player Rating and Game Length}
-To investigate whether player ratings are associated with game length, we divided players into two groups based on their ratings: those with ratings higher than 1500 (high-rated) and those with ratings lower than 1500 (low-rated). The threshold of 1500 was chosen because it represents the starting rating on the Lichess platform. The empirical cumulative distribution function (ECDF) of game lengths for both groups (Figure~\ref{fig:ecdf_plot}) shows that high-rated players generally play longer games.
-
+To investigate whether player ratings are associated with game length, we divided players into two groups based on their ratings: those with ratings higher than 1500 (high-rated) and those with ratings lower than 1500 (low-rated). The threshold of 1500 was chosen because it represents the starting rating on the Lichess platform.
 \subsubsection*{Mann-Whitney U Test for Game Length}
-Since we could not confirm the normality of the rating distribution, we applied the non-parametric Mann-Whitney U test to compare the game lengths between high-rated and low-rated players. Our null hypothesis was that high-rated players do not play longer games than low-rated players on average. The test returned a p-value of \(2.7 \times 10^{-73}\), which allows us to reject the null hypothesis. Therefore, we conclude that player rating significantly influences game length, with higher-rated players tending to play longer games.
+Since we could not confirm the normality of the rating distribution, we applied the non-parametric Mann-Whitney U test to compare the game lengths between high-rated and low-rated players. Our null hypothesis was that high-rated players' game length mean wasn't higher than low-rated players' mean. The test returned a p-value of \(2.7 \times 10^{-73}\), which allows us to reject the null hypothesis. Therefore, we conclude that player rating significantly influences game length, with higher-rated players tending to play longer games.
 
 
 \begin{figure}[H]

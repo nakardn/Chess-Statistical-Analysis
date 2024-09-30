@@ -60,4 +60,4 @@ def fit_gamma_poisson(data):
     plt.ylabel('Density')
     plt.legend()
 
-    return fig
+    return fig, a_fitted, c_fitted, loc_fitted, scale_fitted, lam_fitted, w_fitted
