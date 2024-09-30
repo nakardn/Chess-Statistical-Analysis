@@ -30,3 +30,5 @@ pip install requirements.txt
 ```bash
 python main.py
 ```
+
+All tests are printed to the terminal, all figures are saved to the figures folder.
