@@ -166,7 +166,7 @@ Despite this improvement, the Generalized Gamma distribution does not sufficient
 
 \section{Methods}
 \subsection{Quantile - Quantile Plot}
-
+Quntile-Quantile (QQ) plot is a tool used in order to determine the similarity between two distributions graphically. It is only a visual check over the plot, and does not provide an absolute detemination. In QQ plot, each one of the two distribution, might be samples of theory distribution, are divided into quantiles and is being ordered in an ascending order.  Than, each pair of the same quantile is presented in the QQ plot as a point. The closer the dotted graph to a $y=x$ graph, the more similar the two distributions are. Because in perfect matching each quantile will be the same in bot distributions.
 
 \subsection{Kolmogorov-Smirnov Test}
 The Kolmogorov-Smirnov (KS) test for normality evaluates whether a sample comes from a normal distribution. It uses the empirical cumulative distribution function (ECDF), $F_n(x)$, of the sample and compares it to the cumulative distribution function (CDF) of the normal distribution, $F(x)$. The test statistic, $D_n$, is defined as:
@@ -242,6 +242,11 @@ The Nelder-Mead optimization method is a direct search algorithm used for solvin
 
 
 \section{Discussion}
+We did not reach a test which determine the players rating distribution as a normal distribution. Although we did get very close to it, be using part of the data. We are speculate that it should behave as a normal distribution, and there might be other reasonable filters on the data, in addition to refer only to rated games, or by collecting more data to the statistical analysis.
+
+Mann Whitney U test has being used because the distribution of the players rating did not determined. If a normal distribution, or any other known distribution, will be achieved by a test for the players rating, we might use some more specific test rather than Mann Whitney U test, such as t-test.
+
+In order to determine the correlation between players rating and game length we chose 1500 as a threshold for splitting the players to high and low rated. The choose of 1500 for a threshold between high and low rated players makes sense as it is the starting rate of any player, but it might be better to split the players into more groups in order to see actual correlation between the players rating and the number of turns in their games.
 
 \newpage
 \bibliographystyle{IEEEtran}
