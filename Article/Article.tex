@@ -221,7 +221,12 @@ Decision Rule:
 To test the null hypothesis, compare the calculated U statistic (or Z-score for large samples) to the critical value from the Mann-Whitney U distribution. If the observed value of \( U \) (or \( Z \)) is extreme enough, reject \( H_0 \) in favor of \( H_a \).
 
 \subsection{Gamma-Poisson distribution}
-
+The GP distribution is a simple average between a general Gamma distribution(GGD) and a Poisson distribution weighted by a parameter w.
+\[f_{GP}(x|\alpha, \beta, \gamma, \lambda, w) = wf_{GGD}(x|\alpha, \beta, \gamma) + (1-w)f_P(\lambda)\]
+Let us find the MLE of GP:
+\[L_{GP}(\alpha, \beta, \gamma, \lambda, w) = \prod_{i=1}^n f_{GP}(x_i|\alpha, \beta, \gamma, \lambda, w)\]
+\[= \prod_{i=1}^n [wf_{GGD}(x|\alpha, \beta, \gamma) + (1-w)f_P(\lambda)]\]
+Now, by taking the negative log of the likelihood function, we can use minimizing optimization algorithms to find the optimal parameters numerically, since here an analytical solution is difficult to find.
 
 \subsection{Nelder - Mead optimization method}
 
