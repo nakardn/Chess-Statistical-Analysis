@@ -14,7 +14,7 @@ Here's how to set up and run the code in this repository:
 Open your terminal or command prompt and navigate to the directory where you want to store the project.  Then run:
 
 ```bash
-git clone https://github.com/nakardn/Chess-Statistical-Analysis  # Replace with your actual repository UR
+git clone https://github.com/nakardn/Chess-Statistical-Analysis
 ```
 **2. Get Dependencies:**
 
