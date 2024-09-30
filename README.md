@@ -15,17 +15,18 @@ Open your terminal or command prompt and navigate to the directory where you wan
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git  # Replace with your actual repository UR
-
+```
 **2. Get Dependencies:**
 
 Enter the repository folder
 ```bash
 cd Chess-Statistical-Analysis
-
+```
 Download dependencies
 ```bash
 pip install requirements.txt
-
+```
 **3. Run:**
 ```bash
 python main.py
+```
