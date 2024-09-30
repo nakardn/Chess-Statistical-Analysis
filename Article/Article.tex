@@ -158,7 +158,8 @@ Despite this improvement, the Generalized Gamma distribution does not sufficient
 \section{Methods}
 \subsection{Quantile - Quantile Plot}
 
-\subsection{Kolmogorov-Smirnov Test for Normality}
+
+\subsection{Kolmogorov-Smirnov Test}
 The Kolmogorov-Smirnov (KS) test for normality evaluates whether a sample comes from a normal distribution. It uses the empirical cumulative distribution function (ECDF), $F_n(x)$, of the sample and compares it to the cumulative distribution function (CDF) of the normal distribution, $F(x)$. The test statistic, $D_n$, is defined as:
 \[D_n = \sup_x |F_n(x) - F(x)|\]
 
@@ -167,7 +168,8 @@ The null hypothesis $H_0$ assumes that the sample comes from the normal distribu
     If $D_n$ exceeds a critical value (based on the sample size and significance level), we reject $H_0$, concluding the sample deviates significantly from normality.
 
 The KS test is sensitive to both location and shape differences, but less powerful in detecting deviations in the tails of the distribution when compared to other tests like Shapiro-Wilk or Anderson-Darling.
-
+\subsubsection*{2 sample KS test}
+Follows the same principles, except it compares two ECDF's from two samples.
 \subsection{Correlation Matrix}
 A correlation matrix is a table that displays the pairwise correlation coefficients between multiple variables in a dataset. Each element in the matrix represents the degree of linear relationship between two variables, typically measured by Pearson's correlation coefficient:
 \[r_{XY} = \frac{Cov(X,Y)}{\sigma_X\sigma_Y}\]
@@ -218,6 +220,12 @@ Decision Rule:
 
 To test the null hypothesis, compare the calculated U statistic (or Z-score for large samples) to the critical value from the Mann-Whitney U distribution. If the observed value of \( U \) (or \( Z \)) is extreme enough, reject \( H_0 \) in favor of \( H_a \).
 
+\subsection{Gamma-Poisson distribution}
+
+
+\subsection{Nelder - Mead optimization method}
+
+\section{Discussion}
 
 \newpage
 \bibliographystyle{IEEEtran}
