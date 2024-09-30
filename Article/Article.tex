@@ -229,6 +229,8 @@ Let us find the MLE of GP:
 Now, by taking the negative log of the likelihood function, we can use minimizing optimization algorithms to find the optimal parameters numerically, since here an analytical solution is difficult to find.
 
 \subsection{Nelder - Mead optimization method}
+The Nelder-Mead optimization method is a direct search algorithm used for solving unconstrained nonlinear optimization problems without requiring gradient information. It operates on a simplex, a geometric shape consisting of $n+1$ vertices in an $n$-dimensional space. The algorithm iteratively updates this simplex by reflecting, expanding, contracting, or shrinking its vertices to explore the search space. These transformations aim to minimize an objective function $f(x)$ through comparisons of function values at the simplex vertices. Despite its simplicity, the method is known for efficiency in practice but does not guarantee convergence to a global minimum, especially in higher-dimensional or highly non-convex landscapes. It is widely applied in scenarios where gradient information is unavailable or expensive to compute.
+
 
 \section{Discussion}
 

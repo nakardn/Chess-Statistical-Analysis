@@ -34,7 +34,16 @@ save_plot(fig, 'ratingqq', save_dir)
 
 KS_norm_test(df_tr['ave_rating'].astype(int))
 
-#MWU_test()
+# Classifying players into groups based on skill
+df_cl = df_tr.copy()
+def skill_classification(x):
+    if x < 1500:
+        return 'low'
+    else:
+        return 'high'
+
+df_cl['ave_rating'] = df_cl['ave_rating'].apply(skill_classification)
+MWU_test(df_cl[df_cl['ave_rating'] == 'high']['turns'], df_cl[df_cl['ave_rating'] == 'low']['turns'])
 
 fig = corr_plot(df_tr) 
 
